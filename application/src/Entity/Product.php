@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\JobRepository;
+use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=JobRepository::class)
+ * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ORM\HasLifecycleCallbacks
  */
-class Job
+class Product
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INVACTIVE = 0;
@@ -44,9 +44,14 @@ class Job
     private $description;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="products")
+     */
+    private $tags;
 
     /**
      * @ORM\Column(type="datetime")
@@ -57,11 +62,6 @@ class Job
      * @ORM\Column(type="datetime")
      */
     private $updated_at;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="jobs")
-     */
-    private $tags;
 
     public function __construct()
     {
@@ -130,46 +130,9 @@ class Job
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function updatedTimestamps(): void
-    {
-        $this->setUpdatedAt(new \DateTime('now'));
-
-        if ($this->getCreatedAt() === null) {
-            $this->setCreatedAt(new \DateTime('now'));
-        }
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
-    {
-        $this->updated_at = $updated_at;
 
         return $this;
     }
@@ -194,6 +157,43 @@ class Job
     public function removeTag(Tag $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps(): void
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+
+        if ($this->getCreatedAt() === null) {
+            $this->setCreatedAt(new \DateTime('now'));
+        }
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

@@ -7,13 +7,13 @@
         <div class="content">
             <h1 class="heading_mobile">Game Development, AI&nbsp;Research &&nbsp;Deployment</h1>
         </div>
-        <div class="banner" style="background-image:url('/uploads/{{ settings.bannerImage }}')">
+        <div class="banner" style="background-image:url('/uploads/{{ settings.get('banner_image') }}')">
             <h1>Game Development,<br>AI&nbsp;Research &&nbsp;Deployment</h1>
             <img src="assets/images/logo_main.svg" alt="Temporal Games" class="logo_main">
         </div>
         <div class="content">
             <div class="quote">
-                <h3>{{ settings.bannerText  }}</h3>
+                <h3>{{ settings.get('banner_text')  }}</h3>
                 <p><a href="#jobs" onclick="event.preventDefault();doScrolling('jobs', this)" id="jobs_inner_link">Join us <span class="arrow">&darr;</span></a></p>
             </div>
         </div>

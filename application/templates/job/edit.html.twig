@@ -16,3 +16,22 @@
 
 </div>
 {% endblock %}
+
+{% block scripts %}
+{{ parent() }}
+<script>
+    jQuery(document).ready(function() {
+            // Get the ul that holds the collection of tags
+            var $tagsCollectionHolder = $('ul.tags');
+            // count the current form inputs we have (e.g. 2), use that as the new
+            // index when inserting a new item (e.g. 2)
+            $tagsCollectionHolder.data('index', $tagsCollectionHolder.find('input').length);
+
+            $('body').on('click', '.add_item_link', function(e) {
+                    var $collectionHolderClass = $(e.currentTarget).data('collectionHolderClass');
+                    // add a new tag form (see next code block)
+                    addFormToCollection($collectionHolderClass);
+                })
+        });
+</script>
+{% endblock %}

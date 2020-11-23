@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Job;
+use App\Entity\Tag;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -17,7 +18,6 @@ class JobFixtures extends Fixture
                 'name'        => 'C++ Core Engineer',
                 'description' => 'Experienced C++ engineer for development of core artificial intelligence technology framework and integration modules.',
                 'content'     => '
-                    <p class="date"><span>#engineering</span><span>#full-time</span><span>#remote</span><span>#fluxcortex</span></p>
                     <p class="list_heading"><b>Responsibilities:</b></p>
                     <ul>
                         <li>Take part in design and develop core artificial intelligence technology framework and integration modules</li>
@@ -35,7 +35,8 @@ class JobFixtures extends Fixture
                     </ul>
                     <p><b>Apply:</b></p>
                     <p><a href="mailto:job@temporal.games" class="mailto">job@temporal.games</a></p>
-                '
+                ',
+                'tags' => ['engineering', 'full-time', 'remote', 'fluxcortex']
             ],
             [
                 'status'      => Job::STATUS_ACTIVE,
@@ -43,7 +44,6 @@ class JobFixtures extends Fixture
                 'name'        => 'VFX Artist',
                 'description' => 'Specialist capable of designing and implementing highly stylized visual effects, improving tools and optimizing pipelines.',
                 'content'     => '
-                    <p class="date"><span>#techart</span><span>#remote</span><span>#riflecore</span></p>
                     <p>Join us as a versatile visual effects artist specialized in creation of stylised and captivating visual effects fit for Riflecore’s artistic vision, utilizing already designed solutions and further develop an approach for our visual effects. Become a part of our art team, work under supervision and in collaboration with the project\'s Art-Director and Technical Artist.</p>
                     <p class="list_heading"><b>Responsibilities:</b></p>
                     <ul>
@@ -67,7 +67,8 @@ class JobFixtures extends Fixture
                     </ul>
                     <p><b>Apply:</b></p>
                     <p><a href="mailto:job@temporal.games" class="mailto">job@temporal.games</a></p>
-                '
+                ',
+                'tags' => ['techart', 'remote', 'riflecore']
             ],
             [
                 'status'      => Job::STATUS_ACTIVE,
@@ -75,7 +76,6 @@ class JobFixtures extends Fixture
                 'name'        => 'UI Designer',
                 'description' => 'Experienced UI/UX designer with a portfolio of game projects, capable of conceptualizing and implementing UI for Riflecore.',
                 'content'     => '
-                    <p class="date"><span>#ui</span><span>#ux</span><span>#gui</span><span>#remote</span><span>#riflecore</span></p>
                     <p>Experienced UI/UX designer with a portfolio of game projects, capable of both conceptualizing and implementing UI for Riflecore.</p>
                     <p class="list_heading"><b>Responsibilities:</b></p>
                     <ul>
@@ -102,7 +102,8 @@ class JobFixtures extends Fixture
                     </ul>
                     <p><b>Apply:</b></p>
                     <p><a href="mailto:job@temporal.games" class="mailto">job@temporal.games</a></p>
-                '
+                ',
+                'tags' => ['ui', 'ux', 'gui', 'remote'. 'riflecore']
             ],
             [
                 'status'      => Job::STATUS_ACTIVE,
@@ -110,7 +111,6 @@ class JobFixtures extends Fixture
                 'name'        => 'Data Scientist',
                 'description' => 'Experienced data scientist interested in developing new advanced technologies related to simulating convincing human-like behavior in learning, motion, speech and decision making.',
                 'content'     => '
-                    <p class="date"><span>#engineering</span><span>#full-time</span><span>#remote</span><span>#fluxcortex</span></p>
                     <p class="list_heading"><b>Responsibilities:</b></p>
                     <ul>
                         <li>Take part in research to advance the state-of-the-art in virtual beings</li>
@@ -125,9 +125,12 @@ class JobFixtures extends Fixture
                     </ul>
                     <p><b>Apply:</b></p>
                     <p><a href="mailto:job@temporal.games" class="mailto">job@temporal.games</a></p>
-                '
+                ',
+                'tags' => ['engineering', 'full-time', 'remote', 'fluxcortex']
             ]
         ];
+
+        $tagRepository = $manager->getRepository(Tag::class);
 
         foreach ($jobs as $job) {
             $entity = new Job();
@@ -136,6 +139,17 @@ class JobFixtures extends Fixture
             $entity->setName($job['name']);
             $entity->setContent($job['content']);
             $entity->setDescription($job['description']);
+
+            foreach ($job['tags'] as $tag) {
+                $tagEntity = $tagRepository->findOneBy(['name' => $tag]);
+                if (null === $tagEntity) {
+                    $tagEntity = new Tag();
+                    $tagEntity->setName($tag);
+                    $manager->persist($tagEntity);
+                }
+
+                $entity->addTag($tagEntity);
+            }
 
             $manager->persist($entity);
         }

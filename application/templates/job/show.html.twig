@@ -17,6 +17,7 @@
         </div>
         <div class="text_left">
             <h1>{{ job.name }}</h1>
+            <p class="date">{% include '_tags.html.twig' with {'tags': job.tags} %}</p>
             {{ job.content|raw }}
         </div>
     </div>

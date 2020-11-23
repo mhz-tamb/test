@@ -20,38 +20,38 @@ class Settings
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $banner_image;
+    private $key;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
-    private $banner_text;
+    private $value;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getBannerImage(): ?string
+    public function getKey(): ?string
     {
-        return $this->banner_image;
+        return $this->key;
     }
 
-    public function setBannerImage(string $banner_image): self
+    public function setKey(string $key): self
     {
-        $this->banner_image = $banner_image;
+        $this->key = $key;
 
         return $this;
     }
 
-    public function getBannerText(): ?string
+    public function getValue(): ?string
     {
-        return $this->banner_text;
+        return $this->value;
     }
 
-    public function setBannerText(string $banner_text): self
+    public function setValue(string $value): self
     {
-        $this->banner_text = $banner_text;
+        $this->value = $value;
 
         return $this;
     }

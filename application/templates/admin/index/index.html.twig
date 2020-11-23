@@ -8,8 +8,8 @@
     <div class="card">
         <div class="card-header">Homepage settings</div>
         <div class="card-body">
-            {% if settingsForm.vars.data.bannerImage %}
-                <img src="/uploads/{{ settingsForm.vars.data.bannerImage  }}" width="200"/>
+            {% if settingsForm.vars.data.banner_image %}
+                <img src="/uploads/{{ settingsForm.vars.data.banner_image  }}" width="200"/>
             {% endif %}
 
             {{ form(settingsForm) }}
