@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ job.name }}{% endblock %}
+
+{% block header %}
+    <header class="inner_header" id="header">
+        <div class="content">
+            <a href="/#jobs"><span class="arrow">&larr;</span> Go back</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="text_right">
+            <img src="assets/images/logo_main_1.svg" alt="Temporal Games">
+        </div>
+        <div class="text_left">
+            <h1>{{ job.name }}</h1>
+            {{ job.content|raw }}
+        </div>
+    </div>
+{% endblock %}

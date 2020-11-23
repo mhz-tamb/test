@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+    <div id="about">
+        <div class="content">
+            <h1 class="heading_mobile">Game Development, AI&nbsp;Research &&nbsp;Deployment</h1>
+        </div>
+        <div class="banner" style="background-image:url('/uploads/{{ settings.bannerImage }}')">
+            <h1>Game Development,<br>AI&nbsp;Research &&nbsp;Deployment</h1>
+            <img src="assets/images/logo_main.svg" alt="Temporal Games" class="logo_main">
+        </div>
+        <div class="content">
+            <div class="quote">
+                <h3>{{ settings.bannerText  }}</h3>
+                <p><a href="#jobs" onclick="event.preventDefault();doScrolling('jobs', this)" id="jobs_inner_link">Join us <span class="arrow">&darr;</span></a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="items">
+        <div class="content">
+            <div class="line"></div>
+            <div class="item" id="fluxcortex">
+                <div class="item_left">
+                    <div class="item_left_heading">
+                        <h2 class="item_left_first_heading">01</h2>
+                        <h2>fluxCortex</h2>
+                    </div>
+                    <div class="tags"><p>#ai</p><p>#evolvingai</p><p>#virtualbeings</p></div>
+                </div>
+                <div class="item_right">
+                    <p><b>fluxCortex Azu®</b> — next-generation Evolving AI hybrid architecture based on genetic algorithms and reinforcement learning.</p>
+                    <p>Virtual Beings solution for natural interaction with emotional feedback and ability for real-time acquisition of skills.</p>
+                </div>
+            </div>
+            <div class="item" id="fluxneat">
+                <div class="item_left">
+                    <div class="item_left_heading">
+                        <h2 class="item_left_first_heading">02</h2>
+                        <h2>fluxNEAT</h2>
+                    </div>
+                    <div class="tags"><p>#ai</p><p>#genetic</p><p>#bots</p><p>#npc</p></div>
+                </div>
+                <div class="item_right">
+                    <p><b>fluxNEAT®</b> — evolving Neural Networks solution capable of learning skills in real-time with zero to minimal pre-training data.</p>
+                    <p>Self-learning system for application in games providing human-like, evolving behaviors of computer-controlled characters.</p>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="item" id="riflecore">
+                <div class="item_left">
+                    <div class="item_left_heading">
+                        <h2 class="item_left_first_heading">03</h2>
+                        <h2>Riflecore</h2>
+                    </div>
+                    <div class="tags"><p>#gamedevelopment</p><p>#onlinegame</p><p>#brawler</p></div>
+                </div>
+                <div class="item_right">
+                    <p><b>Riflecore</b> fuses brawling fundamentals with tactical gunplay. Take map control with your teammates and demolish the enemies in a truly competitive way.</p>
+                    <p>Your victories and choices will shape the tides of the ongoing hybrid war on the world map, and decide the fate of key characters with each new season rollout.</p>
+                    <p><a href="riflecore.html">View more <span class="arrow">&rarr;</span></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ include('job/_list.html.twig') }}
+
+    <div id="contacts"></div>
+    <div class="contacts">
+        <div class="content">
+            <p class="heading">Get in touch</p>
+            <h3 id="delivery">The message has been sent, thank you.</h3>
+            <form id="form" onsubmit="submitForm(event)">
+                <input type="text" name="name" placeholder="Name" id="name" onfocus="focusIn(this)" onfocusout="focusOut(this, 'Name')">
+                <input type="text" name="email" placeholder="E-mail" id="email" onfocus="focusIn(this)" onfocusout="focusOut(this, 'E-mail')">
+                <textarea type="text" name="message" placeholder="Message" id="message" onfocus="focusIn(this)" onfocusout="focusOut(this, 'Message')" maxlength="500"></textarea>
+                <input type="submit" value="Send message" class="submit"> 
+            </form>
+        </div>
+    </div>
+{% endblock %}

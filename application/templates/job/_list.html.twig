@@ -1,0 +1,31 @@
+<!-- DUBLICATE JOBS IN BOTH SECTIONS (COLUMNS AND SLIDER) -->
+<div class="jobs" id="jobs">
+    <div class="content">
+        <p class="heading">{{ title|default('Join us') }}</p>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for job in jobs %}
+                    <div class="job_list_item swiper-slide">
+                        <h3>{{ job.name }}</h3>
+                        <p>{{ job.description }}</p>
+                        <p><a href="{{ path('job_show', { slug: job.slug }) }}">View more <span class="arrow">&rarr;</span></a></p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="job_list">
+            {% for job in jobs %}
+                <div class="job_list_item">
+                    <h3>{{ job.name }}</h3>
+                    <p>{{ job.description }}</p>
+                    <p><a href="{{ path('job_show', { slug: job.slug }) }}">View more <span class="arrow">&rarr;</span></a></p>
+                </div>
+            {% endfor %}
+            <div class="job_list_item">
+                <h3>Other</h3>
+                <p>If you don’t see your position listed but you think we can work together, feel free to contact us at <a href="mailto:job@temporal.games" class="mailto">job@temporal.games</a>, include your targeted position in the letter subject.</p>
+            </div>
+        </div>
+    </div>
+</div>
