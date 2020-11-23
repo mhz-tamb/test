@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block header %}
+    <header class="inner_header" id="header">
+        <div class="content">
+            <a href="/"><span class="arrow">&larr;</span> Go back</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <div class="content">
+        <div class="text_right">
+            <img src="assets/images/logo_main_1.svg" alt="Temporal Games">
+        </div>
+        <div class="text_left">
+            <h1>{{ product.name }}</h1>
+            <p class="date">{% include '_tags.html.twig' with {'tags': product.tags} %}</p>
+            {{ product.content|raw }}
+        </div>
+    </div>
+{% endblock %}

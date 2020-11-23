@@ -34,4 +34,22 @@
         </div>
     </div>
 </div>
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">Products</div>
+        <div class="card-body">
+            <a class="btn btn-primary mb-2" href="{{ path('admin_product_new') }}">Create</a>
+
+            {% for product in products %}
+                <div class="row mt-2">
+                    <div class="col-1">#{{ product.id }}</div>
+                    <div class="col-9"><a href="{{ path('product_show', { slug: product.slug } ) }}" target="_blank">{{ product.name }}</a></div>
+                    <div class="col-1"><a class="btn btn-primary" href="{{ path('admin_product_edit', { id: product.id }) }}">Edit</a></div>
+                    <div class="col-1">{{ include('product/_delete_form.html.twig') }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Job;
+use App\Entity\Product;
 use App\Service\Settings;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,10 +71,12 @@ class IndexController extends AbstractController
         }
 
         $jobs = $manager->getRepository(Job::class)->findAll();
+        $products = $manager->getRepository(Product::class)->findAll();
 
         return $this->render('admin/index/index.html.twig', [
             'settingsForm' => $form->createView(),
-            'jobs' => $jobs
+            'jobs' => $jobs,
+            'products' => $products
         ]);
     }
 }

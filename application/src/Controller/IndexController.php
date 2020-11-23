@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Job;
+use App\Entity\Product;
 use App\Service\Settings;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +20,11 @@ class IndexController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
 
         $jobs = $manager->getRepository(Job::class)->findBy(['status' => Job::STATUS_ACTIVE]);
+        $products = $manager->getRepository(Product::class)->findBy(['status' => Job::STATUS_ACTIVE]);
 
         return $this->render('index/index.html.twig', [
-            'jobs' => $jobs
+            'jobs' => $jobs,
+            'products' => $products
         ]);
     }
 }

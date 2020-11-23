@@ -1,0 +1,27 @@
+<div class="items">
+        <div class="content">
+            <div class="line"></div>
+            {% for product in products %}
+                <div class="item" id="{{ product.slug }}">
+                    <div class="item_left">
+                        <div class="item_left_heading">
+                            <h2 class="item_left_first_heading">0{{ loop.index }}</h2>
+                            <h2>{{ product.name }}</h2>
+                        </div>
+                        <div class="tags">
+                            {% for tag in product.tags %}
+                                <p>#{{ tag.name }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="item_right">
+                        {{ product.description|raw }}
+
+                        {% if product.content %}
+                            <p><a href="{{ path('product_show', {slug: product.slug}) }}">View more <span class="arrow">&rarr;</span></a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
